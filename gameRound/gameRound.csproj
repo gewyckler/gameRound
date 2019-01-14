@@ -44,11 +44,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AttackPointBtn.cs" />
+    <Compile Include="Battle.cs" />
     <Compile Include="BlockPointBtn.cs" />
     <Compile Include="DodgePointBtn.cs" />
+    <Compile Include="DodgeRandom.cs" />
     <Compile Include="HealthPointBtn.cs" />
     <Compile Include="ICommands.cs" />
     <Compile Include="IPointGiver.cs" />
+    <Compile Include="IWhatToDo.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="PersonCreator.cs" />
     <Compile Include="Program.cs" />

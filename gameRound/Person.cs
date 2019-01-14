@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 
 namespace gameRound
 {
-    class Person : IPointGiver
+    class Person : IPointGiver, IWhatToDo
     {
 
         Random rnd = new Random();
         public string Name { get; set; }
         public int MaxAttack { get; set; }
         public int Health { get; set; }
-        public int Block { get; set; }
+        public int MaxBlock { get; set; }
         public int Dodge { get; set; }
-        public Person(string name, int healt, int block, int dodge, int maxAttack)
+        public Person(string name, int healt, int maxBlock, int dodge, int maxAttack)
         {
             Name = name;
             Health = healt;
-            Block = block;
+            MaxBlock = maxBlock;
             Dodge = dodge;
             MaxAttack = maxAttack;
         }
@@ -27,12 +27,16 @@ namespace gameRound
         {
             return (rnd.Next(1, MaxAttack));
         }
+        public int Block()
+        {
+            return (rnd.Next(1, MaxBlock));
+        }
 
         public void PrintPerson()
         {
             Console.WriteLine($"Name: {Name}");
             Console.WriteLine($"[1] Healt: {Health}");
-            Console.WriteLine($"[2] Block: {Block}");
+            Console.WriteLine($"[2] Block: {MaxBlock}");
             Console.WriteLine($"[3] Dodge: {Dodge}");
             Console.WriteLine($"[4] Attack: {MaxAttack}\n");
 
@@ -40,7 +44,7 @@ namespace gameRound
 
         public void AttackUp()
         {
-            MaxAttack++;
+            MaxAttack+=5;
             Console.WriteLine("Attack increas by 1 pt!");
         }
 
@@ -48,7 +52,7 @@ namespace gameRound
         {
             if (MaxAttack != 1)
             {
-                MaxAttack--;
+                MaxAttack-=5;
                 Console.WriteLine("Healt decreas by 1 pt!");
             }
             else
@@ -60,7 +64,7 @@ namespace gameRound
 
         public void HealtUp()
         {
-            Health++;
+            Health+= 5;
             Console.WriteLine("Health increas by 1 pt!");
         }
 
@@ -68,7 +72,7 @@ namespace gameRound
         {
             if (Health != 1)
             {
-                Health--;
+                Health-=5;
                 Console.WriteLine("Health decreas by 1 pt!");
             }
             else
@@ -80,15 +84,15 @@ namespace gameRound
 
         public void BlockUp()
         {
-            Block++;
+            MaxBlock+=5;
             Console.WriteLine("Block increas by 1 pt!");
         }
 
         public void BlockDown()
         {
-            if(Block != 1)
+            if(MaxBlock != 1)
             {
-                Block--;
+                MaxBlock-=5;
                 Console.WriteLine("Block decreas by 1 pt!");
             }
             else
@@ -99,7 +103,7 @@ namespace gameRound
 
         public void DodgeUp()
         {
-            Dodge++;
+            Dodge+=5;
             Console.WriteLine("Dodge increas by 1 pt!");
         }
 
@@ -107,7 +111,7 @@ namespace gameRound
         {
             if(Dodge != 1)
             {
-                Dodge--;
+                Dodge-=5;
                 Console.WriteLine("Dodge decreas by 1 pt!");
             }
             else
@@ -115,6 +119,32 @@ namespace gameRound
                 Console.WriteLine("Dodge cannot be lower then 1 pt!");
             }
 
+        }
+
+        Person playerA = new Person("nameA", 10, 10, 10, 10);
+        Person playerB = new Person("nameB", 10, 10, 10, 10);
+
+
+        public void DoAttack()
+        {
+            int dmgToPlayerB = playerA.Attack();
+            int playerBHealth = playerB.Health - dmgToPlayerB;
+            Console.WriteLine($"{playerA.Name} attack {playerB.Name}, hit him by {playerA.Attack()} and deal {dmgToPlayerB}.");
+            Console.WriteLine($"{playerB.Name} health is now {playerBHealth}.");
+        }
+
+        public void DoBlock()
+        {
+            int playerAHealth = playerB.Attack() - playerA.Block();
+            int playerABlock = playerA.Block();
+
+            Console.WriteLine($"{playerA.Name} try to block {playerB.Name}'s attack. {playerA.Name} get {playerABlock} less damage.");
+            Console.WriteLine($"{playerA.Name} health is now {playerAHealth}.");
+        }
+
+        public void DoDodge()
+        {
+            Console.WriteLine($"{playerA.Name} dodge {playerB.Name}'s attack.");
         }
     }
 }

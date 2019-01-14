@@ -18,7 +18,7 @@ namespace gameRound
             Console.WriteLine("Click from 1 to 4 to add one point to each fetures!\n");
             Console.WriteLine("If you want to remove 1 point click (-) and (number from 1 to 4)!\n");
 
-            Person man1 = new Person(GetName, 1, 1, 1, 1);
+            Person man1 = new Person(GetName, 10, 10, 10, 10);
             Console.WriteLine("Basic stats ->");
             man1.PrintPerson();
 
