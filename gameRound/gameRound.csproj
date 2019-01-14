@@ -44,9 +44,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AttackPointBtn.cs" />
+    <Compile Include="BlockPointBtn.cs" />
+    <Compile Include="DodgePointBtn.cs" />
+    <Compile Include="HealthPointBtn.cs" />
     <Compile Include="ICommands.cs" />
     <Compile Include="IPointGiver.cs" />
     <Compile Include="Person.cs" />
+    <Compile Include="PersonCreator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

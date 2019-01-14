@@ -6,22 +6,22 @@ using System.Threading.Tasks;
 
 namespace gameRound
 {
-    class AttackPointBtn : ICommands
+    class HealthPointBtn : ICommands
     {
-        IPointGiver APoint; 
-        public AttackPointBtn (IPointGiver Apoint)
+        IPointGiver HPoint;
+        public HealthPointBtn(IPointGiver Hpoint)
         {
-            this.APoint = Apoint;
+            this.HPoint = Hpoint;
         }
 
         public void PointDown()
         {
-            APoint.AttackDown();
+            HPoint.HealtDown();
         }
 
         public void PointUp()
         {
-            APoint.AttackUp();
+            HPoint.HealtUp();
         }
     }
 }
