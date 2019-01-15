@@ -10,10 +10,9 @@ namespace gameRound
     {
         static void Main(string[] args)
         {
-            PersonCreator player1 = new PersonCreator();
-            PersonCreator player2 = new PersonCreator();
+            Person a = new Person("", 0, 0, 0, 0);
+            a.CreatePerson();
 
-            
             Console.ReadKey();
         }
     }

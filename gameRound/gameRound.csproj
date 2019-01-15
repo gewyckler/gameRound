@@ -50,7 +50,6 @@
     <Compile Include="BlockPointBtn.cs" />
     <Compile Include="DodgeCommand.cs" />
     <Compile Include="DodgePointBtn.cs" />
-    <Compile Include="DodgeRandom.cs" />
     <Compile Include="HealthPointBtn.cs" />
     <Compile Include="IBattleCommands.cs" />
     <Compile Include="ICommands.cs" />
