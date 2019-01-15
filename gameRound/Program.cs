@@ -12,7 +12,8 @@ namespace gameRound
         {
             PersonCreator player1 = new PersonCreator();
             PersonCreator player2 = new PersonCreator();
-            Battle.StartBattle(player1, player2);
+
+            
             Console.ReadKey();
         }
     }

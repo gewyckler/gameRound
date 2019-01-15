@@ -16,12 +16,12 @@ namespace gameRound
 
         public void PointDown()
         {
-            HPoint.HealtDown();
+            HPoint.HealthDown();
         }
 
         public void PointUp()
         {
-            HPoint.HealtUp();
+            HPoint.HealthUp();
         }
     }
 }

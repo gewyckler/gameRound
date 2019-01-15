@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace gameRound
 {
-    class Battle
+    interface IBattleCommands
     {
-        Console.WriteLine("");
+        void Execute();
     }
 }

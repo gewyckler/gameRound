@@ -62,13 +62,13 @@ namespace gameRound
         
         }
 
-        public void HealtUp()
+        public void HealthUp()
         {
             Health+= 5;
             Console.WriteLine("Health increas by 1 pt!");
         }
 
-        public void HealtDown()
+        public void HealthDown()
         {
             if (Health != 1)
             {

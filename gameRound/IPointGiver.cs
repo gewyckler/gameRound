@@ -8,8 +8,8 @@ namespace gameRound
 {
     interface IPointGiver
     {
-        void HealtUp();
-        void HealtDown();
+        void HealthUp();
+        void HealthDown();
         void BlockUp();
         void BlockDown();
         void DodgeUp();
