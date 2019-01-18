@@ -11,5 +11,6 @@ namespace gameRound
         void DoAttack();
         void DoBlock();
         void DoDodge();
+        void DoHealing();
     }
 }

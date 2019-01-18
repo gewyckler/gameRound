@@ -20,7 +20,7 @@ namespace gameRound
         
         public Person(string name, int healt, int maxBlock, int dodge, int maxAttack)
         {
-            
+            Console.WriteLine("tworze postac");
             Name = name;
             Health = healt;
             MaxBlock = maxBlock;
@@ -40,8 +40,6 @@ namespace gameRound
         }
 
         string GetName = "";
-        Person player1 = new Person("", 10, 10, 10, 10);
-        Person player2 = new Person("", 10, 10, 10, 10);
 
         public void CreatePerson()
         {
@@ -53,65 +51,60 @@ namespace gameRound
             Console.WriteLine("Click from 1 to 4 to add one point to each fetures!\n");
             Console.WriteLine("If you want to remove 1 point click (-) and (number from 1 to 4)!\n");
 
-            
             Console.WriteLine("Basic stats ->");
-            player1.PrintPerson();
+            PrintPerson();
 
             int count = 10;
             do
             {
                 int addPoint = Convert.ToInt32(Console.ReadLine());
 
-                AttackPointBtn ABtn = new AttackPointBtn(player1);
-                HealthPointBtn HBtn = new HealthPointBtn(player1);
-                BlockPointBtn BBtn = new BlockPointBtn(player1);
-                DodgePointBtn DBtn = new DodgePointBtn(player1);
                 if (addPoint <= 4)
                 {
 
                     switch (addPoint)
                     {
                         case 1:
-                            HBtn.PointUp();
-                            player1.PrintPerson();
+                            HealthUp();
+                            PrintPerson();
                             count--;
                             break;
                         case -1:
-                            HBtn.PointDown();
-                            player1.PrintPerson();
+                            HealthDown();
+                            PrintPerson();
                             if (count < 10)
                                 count++;
                             break;
                         case 2:
-                            BBtn.PointUp();
-                            player1.PrintPerson();
+                            BlockUp();
+                            PrintPerson();
                             count--;
                             break;
                         case -2:
-                            BBtn.PointDown();
-                            player1.PrintPerson();
+                            BlockDown();
+                            PrintPerson();
                             if (count < 10)
                                 count++;
                             break;
                         case 3:
-                            DBtn.PointUp();
-                            player1.PrintPerson();
+                            DodgeUp();
+                            PrintPerson();
                             count--;
                             break;
                         case -3:
-                            DBtn.PointDown();
-                            player1.PrintPerson();
+                            DodgeDown();
+                            PrintPerson();
                             if (count < 10)
                                 count++;
                             break;
                         case 4:
-                            ABtn.PointUp();
-                            player1.PrintPerson();
+                            AttackUp();
+                            PrintPerson();
                             count--;
                             break;
                         case -4:
-                            ABtn.PointDown();
-                            player1.PrintPerson();
+                            AttackDown();
+                            PrintPerson();
                             if (count < 10)
                                 count++;
                             break;
@@ -121,7 +114,7 @@ namespace gameRound
                 {
                     Console.WriteLine("No point added!");
                     Console.WriteLine("Make sure you click buttons from 1 to 4!\n");
-                    player1.PrintPerson();
+                    PrintPerson();
                     Console.WriteLine($"You have {count} more points");
                     continue;
                 }
@@ -132,7 +125,7 @@ namespace gameRound
 
         public void PrintPerson()
         {
-            Console.WriteLine($"Name: {player1.GetName}");
+            Console.WriteLine($"Name: {Name}");
             Console.WriteLine($"[1] Healt: {Health}");
             Console.WriteLine($"[2] Block: {MaxBlock}");
             Console.WriteLine($"[3] Dodge: {Dodge}");
@@ -218,31 +211,26 @@ namespace gameRound
             }
 
         }
-
-        //Person man1 = new Person("nameA", 0, 0, 0, 0);
-        //Person man2 = new Person("nameB", 0, 0, 0, 0);
-
-
+        
         public void DoAttack()
         {
-            int dmgToPlayerB = player1.Attack();
-            int playerBHealth = player2.Health - dmgToPlayerB;
-            Console.WriteLine($"{player1.Name} attack {player2.Name}, hit him and deals {dmgToPlayerB} pt.");
-            Console.WriteLine($"{player2.Name} health is now {playerBHealth}.");
+            Console.WriteLine($"{Name} attack!");
         }
 
         public void DoBlock()
         {
-            int playerAHealth = player2.Attack() - player1.Block();
-            int playerABlock = player1.Block();
-
-            Console.WriteLine($"{player1.Name} try to block {player2.Name}'s attack. {player1.Name} get {playerABlock} less damage.");
-            Console.WriteLine($"{player1.Name} health is now {playerAHealth}.");
+            Console.WriteLine($"{Name} block opponent's attack by {Block()} pt.\n");
         }
 
         public void DoDodge()
         {
-            Console.WriteLine($"{player1.Name} dodge {player2.Name}'s attack.");
+            Console.WriteLine($"Dodge or not\n");
         }
+        public void DoHealing()
+        {
+            
+            Health = Health + 5;
+        }
+
     }
 }
