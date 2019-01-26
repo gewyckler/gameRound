@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace gameRound
 {
-    interface IWhatToDo
+    interface IPersonActions
     {
         void DoAttack();
         void DoBlock();

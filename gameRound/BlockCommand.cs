@@ -8,8 +8,8 @@ namespace gameRound
 {
     class BlockCommand : IBattleCommands
     {
-        IWhatToDo GoBlock;
-        public BlockCommand(IWhatToDo goBlock)
+        IPersonActions GoBlock;
+        public BlockCommand(IPersonActions goBlock)
         {
             GoBlock = goBlock;
         }

@@ -50,11 +50,14 @@
     <Compile Include="BlockPointBtn.cs" />
     <Compile Include="DodgeCommand.cs" />
     <Compile Include="DodgePointBtn.cs" />
+    <Compile Include="EnemyPerson.cs" />
     <Compile Include="HealthPointBtn.cs" />
     <Compile Include="IBattleCommands.cs" />
     <Compile Include="ICommands.cs" />
+    <Compile Include="IEnemyActions.cs" />
+    <Compile Include="IIntroduce.cs" />
     <Compile Include="IPointGiver.cs" />
-    <Compile Include="IWhatToDo.cs" />
+    <Compile Include="IPersonActions.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="PersonCreator.cs" />
     <Compile Include="Program.cs" />

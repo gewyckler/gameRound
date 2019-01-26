@@ -8,8 +8,8 @@ namespace gameRound
 {
     class AttackComand : IBattleCommands
     {
-        IWhatToDo GoAttack;
-        public AttackComand (IWhatToDo goAttack)
+        IPersonActions GoAttack;
+        public AttackComand (IPersonActions goAttack)
         {
             GoAttack = goAttack;
         }

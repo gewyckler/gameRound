@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace gameRound
 {
-    class Person : IPointGiver, IWhatToDo
+    class Person : IPointGiver, IPersonActions
     {
 
         
@@ -214,23 +214,28 @@ namespace gameRound
         
         public void DoAttack()
         {
-            Console.WriteLine($"{Name} attack!");
+            int pAttack = Attack();
+            Console.WriteLine($"{Name} attack by {pAttack} pt.\n");
+            Health = Health - pAttack;
+
         }
 
         public void DoBlock()
         {
-            Console.WriteLine($"{Name} block opponent's attack by {Block()} pt.\n");
+            int pBlock = Block();
+            Console.WriteLine($"{Name} block opponent's attack by {pBlock} pt.\n");
+            int pHealth = Health;
+            int pAttack = Attack();
+            Console.WriteLine($"{Name}'s health is {pHealth - pAttack + pBlock} pt.\n");
         }
 
         public void DoDodge()
         {
-            Console.WriteLine($"Dodge or not\n");
+            
         }
         public void DoHealing()
         {
-            
-            Health = Health + 5;
+          
         }
-
     }
 }

@@ -8,8 +8,8 @@ namespace gameRound
 {
     class DodgeCommand : IBattleCommands
     {
-        IWhatToDo GoDodge;
-        public DodgeCommand (IWhatToDo goDodge)
+        IPersonActions GoDodge;
+        public DodgeCommand (IPersonActions goDodge)
         {
             GoDodge = goDodge;
         }
