@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace gameRound
 {
-    class EnemyPerson : IEnemyActions
+    class EnemyPerson
     {
         public string Name { get; set; }
         public int MaxAttack { get; set; }
@@ -29,39 +29,68 @@ namespace gameRound
         public int Attack()
         {
             Random rnd = new Random();
-            return (rnd.Next(1, MaxAttack));
+            Random dblRnd = new Random();
+            double atk = dblRnd.NextDouble();
+
+            if (MaxAttack == 10)
+            {
+                return rnd.Next(1, MaxAttack);
+            }
+            if (MaxAttack >= 15 && MaxAttack < 25)
+            {
+                if (atk <= 0.50)
+                {
+                    int MinAttack = MaxAttack - 10;
+                    return rnd.Next(MinAttack, MaxAttack);
+                }
+                else
+                {
+                    return rnd.Next(1, MaxAttack);
+                }
+            }
+            if (MaxAttack >= 25 && MaxAttack < 35)
+            {
+                if (atk <= 0.55)
+                {
+                    int MinAttack = MaxAttack - 15;
+                    return rnd.Next(MinAttack, MaxAttack);
+                }
+                else
+                {
+                    return rnd.Next(1, MaxAttack);
+                }
+            }
+            if (MaxAttack >= 35 && MaxAttack < 45)
+            {
+                if (atk <= 0.60)
+                {
+                    int MinAttack = MaxAttack - 15;
+                    return rnd.Next(MinAttack, MaxAttack);
+                }
+                else
+                {
+                    return rnd.Next(1, MaxAttack);
+                }
+            }
+            if (MaxAttack >= 45)
+            {
+                if (atk <= 0.65)
+                {
+                    int MinAttack = MaxAttack - 15;
+                    return rnd.Next(MinAttack, MaxAttack);
+                }
+                else
+                {
+                    return rnd.Next(1, MaxAttack);
+                }
+            }
+            else
+                return rnd.Next(1, MaxAttack);
         }
         public int Block()
         {
             Random rnd = new Random();
             return (rnd.Next(1, MaxBlock));
-        }
-
-        public void EnemyAttack()
-        {
-            int pAttack = Attack();
-            Console.WriteLine($"{Name} attack by {pAttack} pt.\n");
-            Health = Health - pAttack;
-        }
-
-        public void EnemyBlock()
-        {
-            int pBlock = Block();
-            Console.WriteLine($"{Name} block opponent's attack by {pBlock} pt.\n");
-            int pHealth = Health;
-            int pAttack = Attack();
-            Console.WriteLine($"{Name}'s health is {pHealth - pAttack + pBlock} pt.\n");
-        }
-
-        public void EnemyDodge()
-        {
-            Console.WriteLine($"Dodge or not\n");
-        }
-
-        public void EnemyHealing()
-        {
-            Health = Health + 5;
-            Console.WriteLine($"Healt increas + 5 pt.");
         }
     }
 }

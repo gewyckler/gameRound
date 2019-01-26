@@ -10,10 +10,10 @@ namespace gameRound
     {
         static void Main(string[] args)
         {
-            Person a = new Person("Human", 10, 1, 5, 10);
+            Person a = new Person("", 100, 4, 10, 15);
 
-            EnemyPerson rndA = new EnemyPerson("CPU", 10, 1, 5, 10);
-
+            EnemyPerson rndA = new EnemyPerson("CPU", 100, 4, 10, 35);
+            a.CreatePerson();
             Battle.StartFight(a, rndA);
 
             Console.ReadKey();
