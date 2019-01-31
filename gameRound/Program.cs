@@ -10,10 +10,20 @@ namespace gameRound
     {
         static void Main(string[] args)
         {
-            Person a = new Person("", 100, 4, 10, 15);
+            //zmienic w PRINT PERSON z NAME na GETNAME
+            Person a = new Person("Human", 10, 10, 10, 10);
+            EnemyPerson rndA = new EnemyPerson("CPU", 1, 1, 1, 1);
 
-            EnemyPerson rndA = new EnemyPerson("CPU", 100, 4, 10, 35);
-            a.CreatePerson();
+
+
+
+            ////a.CreatePerson();
+            //Console.WriteLine("Click button to creat enemy");
+            //Console.ReadKey();
+            ////rndA.CreatePerson();
+            //a.PrintPerson();
+            //rndA.PrintPerson();
+
             Battle.StartFight(a, rndA);
 
             Console.ReadKey();

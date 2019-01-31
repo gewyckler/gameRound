@@ -15,11 +15,17 @@ namespace gameRound
                 if (GetAttackResoult(playerA, playerB) == "You win")
                 {
                     Console.WriteLine("You Win.");
+                    Random rnd = new Random();
+                    int points = rnd.Next(2, 5);
+                    playerA.StartExp = playerA.StartExp + points;
+                    Console.WriteLine($"+ {points} exp!");
+                    playerA.LevelUp();
                     break;
                 }
                 if (GetAttackResoult(playerA, playerB) == "You lose")
                 {
                     Console.WriteLine("You Lose.");
+                    Console.WriteLine("GAME OVER!");
                     break;
                 }
             }
@@ -43,11 +49,7 @@ namespace gameRound
             int p1Health = player1.Health;
             int p2Health = player2.Health;
 
-            Console.WriteLine(player1.Health);
-            Console.WriteLine(player2.Health);
-
             Console.WriteLine("Your turn!");
-
             Console.WriteLine($"\n{player1.Name} Chose what you want to do:\n");
             Console.WriteLine($"[1] Attack {player2.Name}.");
             Console.WriteLine($"[2] Block -> nothing to block");
@@ -166,22 +168,18 @@ namespace gameRound
                     }
                 }
                 //Player Healing
-                if (choose == 4)
-                {
-                    if(player1.Health == p1Health)
-                    {
-                        Console.WriteLine("Health alredy max");
-                    }
-                    if (player1.Health != p1Health )
-                    {
-                        player1.Health = player1.Health + 10;
-                        Console.WriteLine($"Your health = {player1.Health}.");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Your health is not low enought to be increased by 10.");
-                    }
-                }
+                //if (choose == 4)
+                //{
+                //    if (player1.Health < player1.DoHe)
+                //    {
+                //        player1.Health = player1.Health + 10;
+                //        Console.WriteLine($"Your health = {player1.Health}.");
+                //    }
+                //    else
+                //    {
+                //        Console.WriteLine("Your health is not low enought to be increased by 10.");
+                //    }
+                //}
             } while (choose != 1 && choose != 4) ;
 
         if (player2.Health <= 0)
@@ -212,7 +210,6 @@ namespace gameRound
                 int choose2;
                 do
                 {
-                    
                     Console.Write("Do: ");
                     choose2 = Convert.ToInt32(Console.ReadLine());
                     Console.WriteLine();
@@ -320,11 +317,12 @@ namespace gameRound
                     }
                 } while (choose2 == 1);
             }
-
-            else if (cpuAction == 2) //CPU Healing
+            //CPU Healing
+            else if (cpuAction == 2)
             {
                 
             }
+            //Zwracana wartość
             if (player2.Health <= 0)
             {
                 return "You win";
@@ -337,6 +335,7 @@ namespace gameRound
                 return "nothing";
                     
         }
+        
     }
 }
 

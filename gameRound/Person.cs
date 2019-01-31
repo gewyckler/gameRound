@@ -13,7 +13,8 @@ namespace gameRound
         public int Health { get; set; }
         public int MaxBlock { get; set; }
         public int Dodge { get; set; }
-        
+        public int StartLevel { get; set; }
+        public int StartExp { get; set; }
         public Person(string name, int healt, int maxBlock, int dodge, int maxAttack)
         {
             Console.WriteLine("tworze postac");
@@ -22,8 +23,93 @@ namespace gameRound
             MaxBlock = maxBlock;
             Dodge = dodge;
             MaxAttack = maxAttack;
+            StartLevel = 1;
+            StartExp = 12;
         }
-        
+        public int LevelUp()
+        {
+            if (StartExp >= 10)
+            {
+                Console.Clear();
+                Console.WriteLine("Level Up!\n");
+                StartExp = StartExp - 10;
+                ++StartLevel;
+                Console.WriteLine("You got 2 skill point to spend!\n");
+                PrintPerson();
+                int countP = 2;
+                do
+                {
+                    Console.Write("Choose feature to increase: ");
+                    int spendPoint = Convert.ToInt32(Console.ReadLine());
+                    Console.Clear();
+                    if (spendPoint <= 4)
+                    {
+                        switch (spendPoint)
+                        {
+                            case 1:
+                                HealthUp();
+                                PrintPerson();
+                                countP--;
+                                break;
+                            case -1:
+                                HealthDown();
+                                PrintPerson();
+                                if (countP < 10)
+                                    countP++;
+                                break;
+                            case 2:
+                                AttackUp();
+                                PrintPerson();
+                                countP--;
+                                break;
+                            case -2:
+                                AttackDown();
+                                PrintPerson();
+                                if (countP < 10)
+                                    countP++;
+                                break;
+                            case 3:
+                                BlockUp();
+                                PrintPerson();
+                                countP--;
+                                break;
+                            case -3:
+                                BlockDown();
+                                PrintPerson();
+                                if (countP < 10)
+                                    countP++;
+                                break;
+                            case 4:
+                                DodgeUp();
+                                PrintPerson();
+                                countP--;
+                                break;
+                            case -4:
+                                DodgeDown();
+                                PrintPerson();
+                                if (countP < 10)
+                                    countP++;
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("No point added!");
+                        PrintPerson();
+                        Console.WriteLine("Make sure you click buttons from 1 to 4!\n");
+                        Console.WriteLine($"You have {countP} more points");
+                        continue;
+                    }
+                    Console.WriteLine($"You have {countP} more points");
+                } while (countP != 0);
+                Console.Clear();
+                Console.WriteLine("You distribute all points!\n");
+                PrintPerson();
+                return StartLevel;
+            }
+            else
+            return StartLevel;
+        }
         public int Attack()
         {
             Random rnd = new Random();
@@ -96,23 +182,27 @@ namespace gameRound
         {
             Console.Write("Type a name of a character: ");
             GetName = Console.ReadLine();
-            Console.WriteLine();
-
+            Console.Clear();
             Console.WriteLine("Now you have 10 points to distribute. \n");
             Console.WriteLine("Click from 1 to 4 to add one point to each fetures!\n");
             Console.WriteLine("If you want to remove 1 point click (-) and (number from 1 to 4)!\n");
 
             Console.WriteLine("Basic stats ->");
+            
             PrintPerson();
             
             int count = 10;
             do
             {
+                Console.WriteLine("Click from 1 to 4 to add one point to each fetures!\n");
+                Console.WriteLine("If you want to remove 1 point click (-) and (number from 1 to 4)!\n");
+                Console.Write("Choose: ");
                 int addPoint = Convert.ToInt32(Console.ReadLine());
+                Console.Clear();
 
                 if (addPoint <= 4)
                 {
-
+                    
                     switch (addPoint)
                     {
                         case 1:
@@ -127,34 +217,34 @@ namespace gameRound
                                 count++;
                             break;
                         case 2:
-                            BlockUp();
+                            AttackUp();
                             PrintPerson();
                             count--;
                             break;
                         case -2:
-                            BlockDown();
+                            AttackDown();
                             PrintPerson();
                             if (count < 10)
                                 count++;
                             break;
                         case 3:
-                            DodgeUp();
+                            BlockUp();
                             PrintPerson();
                             count--;
                             break;
                         case -3:
-                            DodgeDown();
+                            BlockDown();
                             PrintPerson();
                             if (count < 10)
                                 count++;
                             break;
                         case 4:
-                            AttackUp();
+                            DodgeUp();
                             PrintPerson();
                             count--;
                             break;
                         case -4:
-                            AttackDown();
+                            DodgeDown();
                             PrintPerson();
                             if (count < 10)
                                 count++;
@@ -164,24 +254,25 @@ namespace gameRound
                 else
                 {
                     Console.WriteLine("No point added!");
-                    Console.WriteLine("Make sure you click buttons from 1 to 4!\n");
                     PrintPerson();
+                    Console.WriteLine("Make sure you click buttons from 1 to 4!\n");
                     Console.WriteLine($"You have {count} more points");
                     continue;
                 }
                 Console.WriteLine($"You have {count} more points");
             } while (count != 0);
+            Console.Clear();
             Console.WriteLine("You distributed all points!");
         }
 
         public void PrintPerson()
         {
-            Console.WriteLine($"Name: {GetName}");
+            Console.WriteLine($"Name: {Name}");
+            Console.WriteLine($"Level: {LevelUp()} (EXP: {StartExp}/10)");
             Console.WriteLine($"[1] Healt: {Health}");
-            Console.WriteLine($"[2] Block: {MaxBlock}");
-            Console.WriteLine($"[3] Dodge: {Dodge}");
-            Console.WriteLine($"[4] Attack: {MaxAttack}\n");
-
+            Console.WriteLine($"[2] Attack: {MaxAttack}");
+            Console.WriteLine($"[3] Block: {MaxBlock}");
+            Console.WriteLine($"[4] Dodge: {Dodge}\n");
         }
 
         public void AttackUp()
