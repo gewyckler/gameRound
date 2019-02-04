@@ -15,17 +15,13 @@ namespace gameRound
                 if (GetAttackResoult(playerA, playerB) == "You win")
                 {
                     Console.WriteLine("You Win.");
-                    Random rnd = new Random();
-                    int points = rnd.Next(2, 5);
-                    playerA.StartExp = playerA.StartExp + points;
-                    Console.WriteLine($"+ {points} exp!");
+                    playerB.CreatePerson();
                     playerA.LevelUp();
                     break;
                 }
                 if (GetAttackResoult(playerA, playerB) == "You lose")
                 {
                     Console.WriteLine("You Lose.");
-                    Console.WriteLine("GAME OVER!");
                     break;
                 }
             }
@@ -35,10 +31,12 @@ namespace gameRound
         {
             if (player2.Health <= 0)
             {
+                Console.WriteLine();
                 return "You win";
             }
             if (player1.Health <= 0)
             {
+                Console.WriteLine();
                 return "You lose";
             }
 
@@ -54,133 +52,121 @@ namespace gameRound
             Console.WriteLine($"[1] Attack {player2.Name}.");
             Console.WriteLine($"[2] Block -> nothing to block");
             Console.WriteLine($"[3] Dodge -> nothing to dodge");
-            Console.WriteLine($"[4] Healing -> +10 HP");
             Console.WriteLine($"    Your healt = {player1.Health}.");
             Console.WriteLine($"    {player2.Name} health = {player2.Health}.");
-            int choose;
+            int choose = 0;
             do
             {
-                Console.Write("Do: ");
-                choose = Convert.ToInt32(Console.ReadLine());
-                Console.WriteLine();
-                //Player attack CPU
-                if (choose == 1)
+                try
                 {
-                    Console.WriteLine($"{player1.Name} attack {player2.Name} and deals {p1Attack} damage pt.");
-                    Random cpuDo = new Random();
-                    double action = cpuDo.NextDouble();
-                    Console.WriteLine(action);
-                    //CPU Block
-                    if (action <= 0.50) 
-                    {
-                        int dmgTop2 = p1Attack - p2Block;
-                        if (dmgTop2 <= 0)
-                        {
-                            dmgTop2 = 1;
-                            p2Block = 0;
-                        }
-                        Console.WriteLine($"{player2.Name} block your attack by {p2Block} pt.");
-                        Console.WriteLine($"Damage deals to {player2.Name} = {dmgTop2} pt.");
-                        player2.Health = player2.Health - dmgTop2;
-                        Console.WriteLine($"{player2.Name} health = {player2.Health} pt.\n");
-                    }
-                    //CPU Dodge
-                    if (action > 0.50 && action <= 0.75)
-                    {
-                        Console.WriteLine($"{player2.Name} try to dodge your attack.");
-                        Random random = new Random();
-                        if (player2.Dodge >= 10 && player2.Dodge < 20)
-                        {
-                            double value = random.NextDouble();
-                            if (value > 0.10)
-                            {
-                                Console.WriteLine($"{player2.Name} fail dodging and get hit by {p1Attack}.");
-                                player2.Health = player2.Health - p1Attack;
-                                Console.WriteLine($"{player2.Name} health = {player2.Health}");
-                            }
-                            else
-                            {
-                                Console.WriteLine($"{player2.Name} dodge the attack.");
-                            }
-                        }
-                        if (player2.Dodge >= 20 && player2.Dodge < 30)
-                        {
-                            double value = random.NextDouble();
-                            if (value > 0.20)
-                            {
-                                Console.WriteLine($"{player2.Name} fail dodging and get hit by {p1Attack}.");
-                                player2.Health = player2.Health - p1Attack;
-                                Console.WriteLine($"{player2.Name} health = {player2.Health}");
-                            }
-                            else
-                            {
-                                Console.WriteLine($"{player2.Name} dodge the attack.");
-                            }
-                        }
-                        if (player2.Dodge >= 30 && player2.Dodge < 40)
-                        {
-                            double value = random.NextDouble();
-                            if (value > 0.30)
-                            {
-                                Console.WriteLine($"{player2.Name} fail dodging and get hit by {p1Attack}.");
-                                player2.Health = player2.Health - p1Attack;
-                                Console.WriteLine($"{player2.Name} health = {player2.Health}");
-                            }
-                            else
-                            {
-                                Console.WriteLine($"{player2.Name} dodge the attack.");
-                            }
-                        }
-                        if (player2.Dodge >= 40 && player2.Dodge < 50)
-                        {
-                            double value = random.NextDouble();
-                            if (value > 0.40)
-                            {
-                                Console.WriteLine($"{player2.Name} fail dodging and get hit by {p1Attack}.");
-                                player2.Health = player2.Health - p1Attack;
-                                Console.WriteLine($"{player2.Name} health = {player2.Health}");
-                            }
-                            else
-                            {
-                                Console.WriteLine($"{player2.Name} dodge the attack.");
-                            }
-                        }
-                        if (player2.Dodge >= 50)
-                        {
-                            double value = random.NextDouble();
-                            if (value > 0.50)
-                            {
-                                Console.WriteLine($"{player2.Name} fail dodging and get hit by {p1Attack}.");
-                                player2.Health = player2.Health - p1Attack;
-                                Console.WriteLine($"{player2.Name} health = {player2.Health}");
-                            }
-                            else
-                            {
-                                Console.WriteLine($"{player2.Name} dodge the attack.");
-                            }
-                        }
-                    }
-                    //CPU Healing
-                    if (action >= 0.75 || player2.Health <= p2Health / 2) 
-                    {
-                        Console.WriteLine("zycie");
+                    Console.Write("Do: ");
+                    choose = Convert.ToInt32(Console.ReadLine());
 
+                    Console.WriteLine();
+                    //Player attack CPU
+                    if (choose == 1)
+                    {
+                        Console.WriteLine($"{player1.Name} attack {player2.Name} and deals {p1Attack} damage pt.");
+                        Random cpuDo = new Random();
+                        double action = cpuDo.NextDouble();
+                        //CPU Block
+                        if (action <= 0.90)
+                        {
+                            int dmgTop2 = p1Attack - p2Block;
+                            if (dmgTop2 <= 0)
+                            {
+                                dmgTop2 = 1;
+                                p2Block = 0;
+                            }
+                            Console.WriteLine($"{player2.Name} block your attack by {p2Block} pt.");
+                            Console.WriteLine($"Damage deals to {player2.Name} = {dmgTop2} pt.");
+                            player2.Health = player2.Health - dmgTop2;
+                            Console.WriteLine($"{player2.Name} health = {player2.Health} pt.\n");
+                        }
+                        //CPU Dodge
+                        if (action > 0.90)
+                        {
+                            Console.WriteLine($"{player2.Name} try to dodge your attack.");
+                            Random random = new Random();
+                            if (player2.Dodge >= 10 && player2.Dodge < 20)
+                            {
+                                double value = random.NextDouble();
+                                if (value > 0.10)
+                                {
+                                    Console.WriteLine($"{player2.Name} fail dodging and get hit by {p1Attack}.");
+                                    player2.Health = player2.Health - p1Attack;
+                                    Console.WriteLine($"{player2.Name} health = {player2.Health}");
+                                }
+                                else
+                                {
+                                    Console.WriteLine($"{player2.Name} dodge the attack.");
+                                }
+                            }
+                            if (player2.Dodge >= 20 && player2.Dodge < 30)
+                            {
+                                double value = random.NextDouble();
+                                if (value > 0.20)
+                                {
+                                    Console.WriteLine($"{player2.Name} fail dodging and get hit by {p1Attack}.");
+                                    player2.Health = player2.Health - p1Attack;
+                                    Console.WriteLine($"{player2.Name} health = {player2.Health}");
+                                }
+                                else
+                                {
+                                    Console.WriteLine($"{player2.Name} dodge the attack.");
+                                }
+                            }
+                            if (player2.Dodge >= 30 && player2.Dodge < 40)
+                            {
+                                double value = random.NextDouble();
+                                if (value > 0.30)
+                                {
+                                    Console.WriteLine($"{player2.Name} fail dodging and get hit by {p1Attack}.");
+                                    player2.Health = player2.Health - p1Attack;
+                                    Console.WriteLine($"{player2.Name} health = {player2.Health}");
+                                }
+                                else
+                                {
+                                    Console.WriteLine($"{player2.Name} dodge the attack.");
+                                }
+                            }
+                            if (player2.Dodge >= 40 && player2.Dodge < 50)
+                            {
+                                double value = random.NextDouble();
+                                if (value > 0.40)
+                                {
+                                    Console.WriteLine($"{player2.Name} fail dodging and get hit by {p1Attack}.");
+                                    player2.Health = player2.Health - p1Attack;
+                                    Console.WriteLine($"{player2.Name} health = {player2.Health}");
+                                }
+                                else
+                                {
+                                    Console.WriteLine($"{player2.Name} dodge the attack.");
+                                }
+                            }
+                            if (player2.Dodge >= 50)
+                            {
+                                double value = random.NextDouble();
+                                if (value > 0.50)
+                                {
+                                    Console.WriteLine($"{player2.Name} fail dodging and get hit by {p1Attack}.");
+                                    player2.Health = player2.Health - p1Attack;
+                                    Console.WriteLine($"{player2.Name} health = {player2.Health}");
+                                }
+                                else
+                                {
+                                    Console.WriteLine($"{player2.Name} dodge the attack.");
+                                }
+                            }
+                        }
                     }
                 }
-                //Player Healing
-                //if (choose == 4)
-                //{
-                //    if (player1.Health < player1.DoHe)
-                //    {
-                //        player1.Health = player1.Health + 10;
-                //        Console.WriteLine($"Your health = {player1.Health}.");
-                //    }
-                //    else
-                //    {
-                //        Console.WriteLine("Your health is not low enought to be increased by 10.");
-                //    }
-                //}
-            } while (choose != 1 && choose != 4) ;
+                catch (FormatException)
+                {
+                    Console.WriteLine("\nThat option does not exist!");
+                }
+                
+            } while (choose != 1) ;
 
         if (player2.Health <= 0)
         {
@@ -191,34 +177,30 @@ namespace gameRound
                         return "You lose";
         }
             Console.WriteLine("CPU turn! \n");
-            Random cpuDo2 = new Random();
-
-            int cpuAction = cpuDo2.Next(1, 2);
+            
             //CPU attack Player
-            if (cpuAction == 1) 
+            
+            Console.WriteLine($"{player2.Name} attack {player1.Name}.");
+            Console.WriteLine($"\n{player1.Name} Chose what you want to do:\n");
+            Console.WriteLine($"[1] Attack {player2.Name} -> you are under attack!");
+            Console.WriteLine($"[2] Block");
+            Console.WriteLine($"[3] Dodge");
+            Console.WriteLine($"    Your healt = {player1.Health}.");
+            Console.WriteLine($"    {player2.Name} health = {player2.Health}.");
+            int choose2 = 0;
+            do
             {
-                
-                Console.WriteLine($"{player2.Name} attack {player1.Name}.");
-
-                Console.WriteLine($"\n{player1.Name} Chose what you want to do:\n");
-                Console.WriteLine($"[1] Attack {player2.Name} -> you are under attack!");
-                Console.WriteLine($"[2] Block");
-                Console.WriteLine($"[3] Dodge");
-                Console.WriteLine($"[4] Healing -> +10 HP");
-                Console.WriteLine($"    Your healt = {player1.Health}.");
-                Console.WriteLine($"    {player2.Name} health = {player2.Health}.");
-                int choose2;
-                do
+                try
                 {
                     Console.Write("Do: ");
                     choose2 = Convert.ToInt32(Console.ReadLine());
                     Console.WriteLine();
                     //Player Block
-                    if (choose2 == 2) 
+                    if (choose2 == 2)
                     {
                         int dmgTop1 = p2Attack - p1Block;
                         Console.WriteLine($"{player2.Name} deal {p2Attack} damage to you.");
-                        if(dmgTop1 <= 0)
+                        if (dmgTop1 <= 0)
                         {
                             dmgTop1 = 1;
                             p1Block = 0;
@@ -229,7 +211,7 @@ namespace gameRound
                         Console.WriteLine($"Your heath = {player1.Health} pt.\n");
                     }
                     //Player Dodge
-                    else if (choose2 == 3) 
+                    else if (choose2 == 3)
                     {
                         Random random = new Random();
                         if (player1.Dodge >= 10 && player1.Dodge < 20)
@@ -246,7 +228,7 @@ namespace gameRound
                                 Console.WriteLine("You dodge the attack.");
                             }
                         }
-                        if (player1.Dodge >= 20  && player1.Dodge < 30)
+                        if (player1.Dodge >= 10 && player1.Dodge < 20)
                         {
                             double value = random.NextDouble();
                             if (value > 0.20)
@@ -260,7 +242,7 @@ namespace gameRound
                                 Console.WriteLine("You dodge the attack.");
                             }
                         }
-                        if (player1.Dodge >= 30 && player1.Dodge < 40)
+                        if (player1.Dodge >= 20 && player1.Dodge < 30)
                         {
                             double value = random.NextDouble();
                             if (value > 0.30)
@@ -274,7 +256,7 @@ namespace gameRound
                                 Console.WriteLine("You dodge the attack.");
                             }
                         }
-                        if (player1.Dodge >= 40 && player1.Dodge < 50)
+                        if (player1.Dodge >= 30 && player1.Dodge < 40)
                         {
                             double value = random.NextDouble();
                             if (value > 0.40)
@@ -288,7 +270,7 @@ namespace gameRound
                                 Console.WriteLine("You dodge the attack.");
                             }
                         }
-                        if (player1.Dodge >= 50)
+                        if (player1.Dodge >= 40)
                         {
                             double value = random.NextDouble();
                             if (value > 0.50)
@@ -303,25 +285,16 @@ namespace gameRound
                                 continue;
                             }
                         }
-                        
+
                     }
-                    //Player Healing
-                    else if (choose2 == 4) 
-                    {
-                                           
-                    }
-                    else
-                    {
-                        Console.WriteLine("This option is pointless!");
-                        continue;
-                    }
-                } while (choose2 == 1);
-            }
-            //CPU Healing
-            else if (cpuAction == 2)
-            {
-                
-            }
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("\nThat option does not exist!");
+                }
+               
+            } while (choose2 == 1);
+            
             //Zwracana wartość
             if (player2.Health <= 0)
             {
@@ -332,7 +305,7 @@ namespace gameRound
                 return "You lose";
             }
             else
-                return "nothing";
+                return "again";
                     
         }
         

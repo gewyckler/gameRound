@@ -17,14 +17,50 @@ namespace gameRound
 
         public EnemyPerson(string name, int healt, int maxBlock, int dodge, int maxAttack)
         {
-            Console.WriteLine("tworze postac");
             Name = name;
             Health = healt;
             MaxBlock = maxBlock;
             Dodge = dodge;
             MaxAttack = maxAttack;
         }
-        
+
+        public void LevelUp()
+        {
+           int countP = 2;
+           do
+           {
+                Console.Write("Choose feature to increase: ");
+                int spendPoint = Convert.ToInt32(Console.ReadLine());
+                Console.Clear();
+                if (spendPoint <= 4)
+                {
+                    switch (spendPoint)
+                    {
+                        case 1:
+                            HealthUp();
+                            PrintPerson();
+                            countP--;
+                            break;
+                        case 2:
+                            AttackUp();
+                            PrintPerson();
+                            countP--;
+                            break;
+                        case 3:
+                            BlockUp();
+                            PrintPerson();
+                            countP--;
+                            break;
+                        case 4:
+                            DodgeUp();
+                            PrintPerson();
+                            countP--;
+                            break;
+                    }
+                }
+           } while (countP != 0);
+        }
+
         public int Attack()
         {
             Random rnd = new Random();
@@ -59,7 +95,7 @@ namespace gameRound
                     return rnd.Next(1, MaxAttack);
                 }
             }
-            if (MaxAttack >= 35 && MaxAttack < 45)
+            if (MaxAttack >= 35 && MaxAttack <= 40)
             {
                 if (atk <= 0.60)
                 {
@@ -71,7 +107,7 @@ namespace gameRound
                     return rnd.Next(1, MaxAttack);
                 }
             }
-            if (MaxAttack >= 45)
+            if (MaxAttack > 40)
             {
                 if (atk <= 0.65)
                 {
@@ -93,8 +129,9 @@ namespace gameRound
         }
         public void CreatePerson()
         {
+            Person a = new Person("",0,0,0,0);
             Random pRnd = new Random();
-            int count = 10;
+            int count = 5;
             do
             {
                 double skillPt = pRnd.NextDouble();
@@ -125,18 +162,14 @@ namespace gameRound
                
             } while (count != 0);
             Console.Clear();
-            
         }
         public void PrintPerson()
         {
             Console.WriteLine($"Name: {Name}");
-           
-            Console.WriteLine($"[1] Healt: {Health}");
-            Console.WriteLine($"[4] Attack: {MaxAttack}");
-            Console.WriteLine($"[2] Block: {MaxBlock}");
-            Console.WriteLine($"[3] Dodge: {Dodge}\n");
-            
-
+            Console.WriteLine($"[1] Healt: {Health} HP.");
+            Console.WriteLine($"[4] Attack: {MaxAttack} Pt.");
+            Console.WriteLine($"[2] Block: {MaxBlock} Pt.");
+            Console.WriteLine($"[3] Dodge: {Dodge} Pt.\n");
         }
 
         public void AttackUp()

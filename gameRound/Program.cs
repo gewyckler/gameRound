@@ -10,25 +10,27 @@ namespace gameRound
     {
         static void Main(string[] args)
         {
-            //zmienic w PRINT PERSON z NAME na GETNAME
-            Person a = new Person("Human", 10, 10, 10, 10);
-            EnemyPerson rndA = new EnemyPerson("CPU", 1, 1, 1, 1);
+            Console.WriteLine("Fight with udead enemy until you die!");
 
+            Person a = new Person("Player", 10, 10, 10, 10);
+            a.CreatePerson();
+            Console.WriteLine("Press a ENTER.. to fight with your enemy!");
+            Console.Read();
+            Console.WriteLine("FIGHT NOW!!!");
+            
 
-
-
-            ////a.CreatePerson();
-            //Console.WriteLine("Click button to creat enemy");
-            //Console.ReadKey();
-            ////rndA.CreatePerson();
-            //a.PrintPerson();
-            //rndA.PrintPerson();
-
-            Battle.StartFight(a, rndA);
-
+            while (a.Health > 0)
+            {
+                EnemyPerson rndA = new EnemyPerson("Undead", 10, 10, 10, 10);
+                rndA.CreatePerson();
+                a.PrintPerson();
+                rndA.PrintPerson();
+                Battle.StartFight(a, rndA);
+                Console.WriteLine("Undead rise again!\nPress ENTER...");
+                Console.ReadKey();
+            }
+            Console.WriteLine("BUT YOU ARE DEAD!     x___x GAME OVER x___x");
             Console.ReadKey();
-
-
         }
     }
 }
