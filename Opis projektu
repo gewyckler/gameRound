@@ -1,0 +1,8 @@
+# gameRound
+gameRound to gra, w której gracz walczy z przeciwnikiem do momentu przegranej gracza. Po każdej wygranej gracz otrzymuje
+losową ilość expa, a przeciwnik jest wskrzeszany z wartością życia ustawioną na 20 oraz podnosi jedna ze swoich umiejętności
+o jeden punkt. I tak, aż gracz popełni błąd albo nie będzie miał dość szczęścia do wygranej. Życie przeciwnika zawsze wynosi
+20 pkt. po wskrzeszeniu chyba ze program przydzieli dodatkowy. Jednak nie jest to stałe. Reszta statystyk jesto podnoszona
+trwale.
+Do stworzenia systemu tworzenia postaci został wykorzystany interface. Dzieki niemu możemu rozdać punkty umiejętności dla swojej postaci.
+Gra nie jest za trudna i charakteryzuje się losowością jeśli chodzi o zadawane obrażenia, blokowanie czy unikanie. Zrezygnowano z systemu leczenia na rzecz posiadania na początku każdej walki początkowej wartości życia i możliwości podniesienia początkowej wartości życia poprzez rozdanie 2 pkt. przy podniesieniu swojego poziomu. Gracz zdobywa następny poziom kiedy zdobędzie więcej niż 10 exp.
