@@ -119,13 +119,15 @@ namespace gameRound
                     }
                     Console.WriteLine($"You have {countP} more points");
                 } while (countP != 0);
-                Console.Clear();
+                
                 Console.WriteLine("You distribute all points!\n");
                 PrintPerson();
-                
             }
             else
+            {
                 StartLevel = StartLevel;
+            }
+                
         }
         public void AttackStats()
         {
@@ -300,7 +302,7 @@ namespace gameRound
             Console.WriteLine("Click from 1 to 4 to add one point to each fetures!\n");
             Console.WriteLine("If you want to remove 1 point click (-) and (number from 1 to 4)!\n");
 
-            Console.WriteLine("Basic stats ->");
+            Console.WriteLine("Basic stats ->\n");
             PrintPerson();
             
             int count = 10;

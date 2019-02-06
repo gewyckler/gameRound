@@ -13,53 +13,95 @@ namespace gameRound
         public int Health { get; set; }
         public int MaxBlock { get; set; }
         public int Dodge { get; set; }
-        public int Level { get; set; }
+        public int StartLevel { get; set; }
+        public int StartExp { get; set; }
 
-        public EnemyPerson(string name, int healt, int maxBlock, int dodge, int maxAttack)
+        public EnemyPerson(string name, int maxBlock, int dodge, int maxAttack)
         {
             Name = name;
-            Health = healt;
+            Health = 20;
             MaxBlock = maxBlock;
             Dodge = dodge;
             MaxAttack = maxAttack;
+            StartLevel = 1;
+            StartExp = 0;
+        }
+        public void Resurrection()
+        {
+            Health = 20;
+            ++StartLevel;
+            int plusP = 1;
+            do
+            {
+                Random rnd = new Random();
+                double choose = rnd.NextDouble();
+                if (choose < 0.40)
+                {
+                    Health += 5;
+                    plusP--;
+                }
+                if (choose >= 0.40 && choose < 0.70)
+                {
+                    MaxAttack += 5;
+                    plusP--;
+                }
+                if (choose >= 0.70 && choose < 0.95)
+                {
+                    MaxBlock += 5;
+                    plusP--;
+                }
+                if (choose >= 0.95)
+                {
+                    Dodge += 5;
+                    plusP--;
+                }
+            } while (plusP != 0);
         }
 
-        public void LevelUp()
-        {
-           int countP = 2;
-           do
-           {
-                Console.Write("Choose feature to increase: ");
-                int spendPoint = Convert.ToInt32(Console.ReadLine());
-                Console.Clear();
-                if (spendPoint <= 4)
-                {
-                    switch (spendPoint)
-                    {
-                        case 1:
-                            HealthUp();
-                            PrintPerson();
-                            countP--;
-                            break;
-                        case 2:
-                            AttackUp();
-                            PrintPerson();
-                            countP--;
-                            break;
-                        case 3:
-                            BlockUp();
-                            PrintPerson();
-                            countP--;
-                            break;
-                        case 4:
-                            DodgeUp();
-                            PrintPerson();
-                            countP--;
-                            break;
-                    }
-                }
-           } while (countP != 0);
-        }
+        //public void LevelUp()
+        //{
+        //    Random rnd = new Random();
+        //    int points = rnd.Next(3, 5);
+        //    StartExp = StartExp + points;
+        //    Console.WriteLine($"+ {points} exp for {Name}!");
+
+        //    if (StartExp >= 10)
+        //    {
+        //        StartExp = StartExp - 10;
+        //        ++StartLevel;
+        //        int cpuP = 1;
+        //        do
+        //        {
+        //            Random r = new Random();
+        //            double spendPoint = r.NextDouble();
+        //            if (spendPoint <= 0.40)
+        //            {
+        //                HealthUp();
+        //                cpuP--;
+        //            }
+        //            else if (spendPoint > 0.40 && spendPoint <= 0.80)
+        //            {
+        //                AttackUp();
+        //                cpuP--;
+        //            }
+        //            else if (spendPoint > 0.80 && spendPoint <= 0.90)
+        //            {
+        //                BlockUp();
+        //                cpuP--;
+        //            }
+        //            else if (spendPoint > 0.90)
+        //            {
+        //                DodgeUp();
+        //                cpuP--;
+        //            }
+        //        } while (cpuP != 0);
+        //        PrintPerson();
+        //    }
+        //    else
+        //    {
+        //        StartLevel = StartLevel;
+        //    }
+        //}
 
         public int Attack()
         {
@@ -129,43 +171,36 @@ namespace gameRound
         }
         public void CreatePerson()
         {
-            Person a = new Person("",0,0,0,0);
             Random pRnd = new Random();
-            int count = 5;
+            int count = 3;
             do
             {
                 double skillPt = pRnd.NextDouble();
                 if (skillPt <= 0.40)
                 {
-                    HealthUp();
+                    AttackUp();
                     PrintPerson();
                     count--;
                 }
                 if (skillPt > 0.40 && skillPt <= 0.80)
                 {
-                    AttackUp();
-                    PrintPerson();
-                    count--;
-                }
-                if (skillPt > 0.80 && skillPt <= 0.89)
-                {
                     BlockUp();
                     PrintPerson();
                     count--;
                 }
-                if (skillPt > 0.89 && skillPt <= 1.00)
+                if (skillPt > 0.80)
                 {
                     DodgeUp();
                     PrintPerson();
                     count--;
                 }
-               
+                Console.Clear();
             } while (count != 0);
-            Console.Clear();
         }
         public void PrintPerson()
         {
             Console.WriteLine($"Name: {Name}");
+            Console.WriteLine($"Level: {StartLevel}");
             Console.WriteLine($"[1] Healt: {Health} HP.");
             Console.WriteLine($"[4] Attack: {MaxAttack} Pt.");
             Console.WriteLine($"[2] Block: {MaxBlock} Pt.");

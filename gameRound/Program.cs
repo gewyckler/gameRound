@@ -12,24 +12,32 @@ namespace gameRound
         {
             Console.WriteLine("Fight with udead enemy until you die!");
 
-            Person a = new Person("Player", 10, 10, 10, 10);
-            a.CreatePerson();
+            Person player = new Person("Player", 10, 10, 10, 10);
+            player.CreatePerson();
             Console.WriteLine("Press a ENTER.. to fight with your enemy!");
             Console.Read();
             Console.WriteLine("FIGHT NOW!!!");
-            
 
-            while (a.Health > 0)
+
+            EnemyPerson rndA = new EnemyPerson("Undead", 10, 10, 10);
+            rndA.CreatePerson();
+            int lvlCounter = 0;
+            while (player.Health > 0)
             {
-                EnemyPerson rndA = new EnemyPerson("Undead", 10, 10, 10, 10);
-                rndA.CreatePerson();
-                a.PrintPerson();
+                Console.Clear();
                 rndA.PrintPerson();
-                Battle.StartFight(a, rndA);
-                Console.WriteLine("Undead rise again!\nPress ENTER...");
+                player.PrintPerson();
+                Battle.StartFight(player, rndA);
+
+                Console.WriteLine("Undead is rising!");
+                Console.WriteLine("Press ENTER... to fight again!\n");
                 Console.ReadKey();
+                rndA.Resurrection();
+                lvlCounter++;
             }
-            Console.WriteLine("BUT YOU ARE DEAD!     x___x GAME OVER x___x");
+            Console.WriteLine("\nBUT YOU ARE DEAD!     x___x GAME OVER x___x");
+            Console.WriteLine($"You die in {lvlCounter} round!");
+            Console.WriteLine($"You win: {lvlCounter - 1} times!");
             Console.ReadKey();
         }
     }

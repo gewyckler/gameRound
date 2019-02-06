@@ -15,7 +15,6 @@ namespace gameRound
                 if (GetAttackResoult(playerA, playerB) == "You win")
                 {
                     Console.WriteLine("You Win.");
-                    playerB.CreatePerson();
                     playerA.LevelUp();
                     break;
                 }
@@ -76,7 +75,7 @@ namespace gameRound
                             if (dmgTop2 <= 0)
                             {
                                 dmgTop2 = 1;
-                                p2Block = 0;
+                                p2Block = p1Attack - 1;
                             }
                             Console.WriteLine($"{player2.Name} block your attack by {p2Block} pt.");
                             Console.WriteLine($"Damage deals to {player2.Name} = {dmgTop2} pt.");
@@ -163,7 +162,6 @@ namespace gameRound
                 }
                 catch (FormatException)
                 {
-                    Console.WriteLine("\nThat option does not exist!");
                 }
                 
             } while (choose != 1) ;
@@ -290,7 +288,6 @@ namespace gameRound
                 }
                 catch (FormatException)
                 {
-                    Console.WriteLine("\nThat option does not exist!");
                 }
                
             } while (choose2 == 1);
